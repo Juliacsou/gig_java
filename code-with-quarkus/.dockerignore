@@ -1,5 +1,8 @@
-*
-!target/*-runner
-!target/*-runner.jar
-!target/lib/*
-!target/quarkus-app/*
+# NÃO ignore src/
+target
+.git
+.github
+.gitignore
+.idea
+*.iml
+.DS_Store
