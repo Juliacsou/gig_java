@@ -10,4 +10,5 @@ public interface AvaliacaoController {
     void editarAvaliacao (Avaliacao avaliacao);
     Avaliacao buscarAvaliacao (int id_avaliacao) throws EntidadeNaoLocalizada;
     List<Avaliacao> buscarAvaliacaoUsuario (String cpf_usuario);
+    void adicionarCompetencias(int idAvaliacao, int idCompetencia);
 }

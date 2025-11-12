@@ -64,7 +64,7 @@ public class UsuarioRestController {
 
     @DELETE
     @Path("/excluir/{cpf}")
-    public Response delete(@PathParam("cpf") String cpf) {
+    public Response excluirUsuario(@PathParam("cpf") String cpf) {
         try {
             this.usuarioController.excluirUsuario(cpf);
             return Response.status(Response.Status.NO_CONTENT).build();

@@ -2,7 +2,9 @@ package br.com.fiap.gig.application.service;
 
 import br.com.fiap.gig.domain.exception.EntidadeNaoLocalizada;
 import br.com.fiap.gig.domain.model.Avaliacao;
+import br.com.fiap.gig.domain.model.Competencia;
 import br.com.fiap.gig.domain.repository.AvaliacaoRepository;
+import br.com.fiap.gig.domain.repository.CompetenciaRepository;
 import br.com.fiap.gig.domain.service.AvaliacaoService;
 
 import java.util.List;
@@ -10,9 +12,11 @@ import java.util.List;
 public class AvaliacaoServiceImpl implements AvaliacaoService {
 
     private final AvaliacaoRepository avaliacaoRepository;
+    private final CompetenciaRepository competenciaRepository;
 
-    public AvaliacaoServiceImpl(AvaliacaoRepository avaliacaoRepository) {
+    public AvaliacaoServiceImpl(AvaliacaoRepository avaliacaoRepository, CompetenciaRepository competenciaRepository) {
         this.avaliacaoRepository = avaliacaoRepository;
+        this.competenciaRepository = competenciaRepository;
     }
 
     @Override
@@ -39,5 +43,16 @@ public class AvaliacaoServiceImpl implements AvaliacaoService {
     @Override
     public List<Avaliacao> buscarAvaliacaoUsuario(String cpf_usuario) {
         return avaliacaoRepository.buscarAvaliacaoUsuario(cpf_usuario);
+    }
+
+    @Override
+    public void adicionarCompetencias(int idAvaliacao, int idCompetencia) {
+        try{
+            Avaliacao avaliacaoExistente = avaliacaoRepository.buscarAvaliacao(idAvaliacao);
+            Competencia competenciaExistente = competenciaRepository.buscarCompetencia(idCompetencia);
+            avaliacaoRepository.adicionarCompetencias(idAvaliacao, idCompetencia);
+        } catch (EntidadeNaoLocalizada e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -11,8 +11,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 public class ControllerConfig {
 
     @ApplicationScoped
-    public AvaliacaoController avaliacaoController(AvaliacaoService funcionarioService) {
-        return new AvaliacaoControllerImpl(funcionarioService);
+    public AvaliacaoController avaliacaoController(AvaliacaoService avaliacaoService, CompetenciaService competenciaService) {
+        return new AvaliacaoControllerImpl(avaliacaoService, competenciaService);
     }
 
     @ApplicationScoped

@@ -189,4 +189,29 @@ public class JdbcAvaliacaoRepository implements AvaliacaoRepository {
             throw new RuntimeException("Erro ao buscar avaliações do usuário avaliado: " + cpf_usuario, e);
         }
     }
+
+    @Override
+    public void adicionarCompetencias(int idAvaliacao, int idCompetencia) {
+        String sql = """
+        INSERT INTO T_GIG_AVALIACAO_COMPETENCIA (ID_COMPETENCIA, ID_AVALIACAO)
+        VALUES (?, ?)
+        """;
+
+        try (Connection conn = this.databaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idCompetencia);
+            stmt.setInt(2, idAvaliacao);
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            if (e.getErrorCode() == 1) {
+                System.out.println("Competência já está vinculada à avaliação ");
+                return;
+            }
+
+            throw new RuntimeException("Erro ao adicionar competência à avaliação", e);
+        }
+    }
 }
