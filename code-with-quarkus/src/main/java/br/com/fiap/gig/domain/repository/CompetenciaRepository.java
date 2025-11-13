@@ -9,5 +9,5 @@ public interface CompetenciaRepository {
     void editarCompetencia (Competencia competencia);
     Competencia buscarCompetencia (int id_competencia) throws EntidadeNaoLocalizada;
     void excluirCompetencia (int id_competencia);
-    List<Competencia> BuscarCompetenciaUsuario (String cpf_usuario);
+    List<Competencia> buscarCompetenciaUsuario(String cpf_usuario);
 }

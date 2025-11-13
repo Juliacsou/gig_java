@@ -35,7 +35,7 @@ public class CompetenciaControllerImpl implements CompetenciaController{
     }
 
     @Override
-    public List<Competencia> BuscarCompetenciaUsuario(String cpf_usuario) {
-        return competenciaService.BuscarCompetenciaUsuario(cpf_usuario);
+    public List<Competencia> buscarCompetenciaUsuario(String cpf_usuario) {
+        return competenciaService.buscarCompetenciaUsuario(cpf_usuario);
     }
 }

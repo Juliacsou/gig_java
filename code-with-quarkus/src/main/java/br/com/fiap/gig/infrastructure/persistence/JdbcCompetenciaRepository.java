@@ -123,7 +123,7 @@ public class JdbcCompetenciaRepository implements CompetenciaRepository {
     }
 
     @Override
-    public List<Competencia> BuscarCompetenciaUsuario(String cpf_usuario) {
+    public List<Competencia> buscarCompetenciaUsuario(String cpf_usuario) {
         String sql = """
         SELECT DISTINCT c.ID_COMPETENCIA, c.NOME_COMPETENCIA, c.PESO
           FROM T_GIG_COMPETENCIA c
