@@ -17,16 +17,17 @@ public class ScoreControllerImpl implements ScoreController{
 
     @Override
     public Score criarScore(Score score) {
-        return null;
+        return scoreService.criarScore(score);
     }
 
     @Override
     public Score buscarScore(String cpf_usuario) throws EntidadeNaoLocalizada {
-        return null;
+        return scoreService.buscarScore(cpf_usuario);
     }
 
     @Override
-    public Score calcularScore(Score score, List<Avaliacao> avaliacoes) {
-        return null;
+    public void atualizarScore(String cpf) {
+        scoreService.atualizarScore(cpf);
     }
+
 }

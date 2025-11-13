@@ -3,6 +3,7 @@ package br.com.fiap.gig.infrastructure.api.rest;
 import br.com.fiap.gig.domain.exception.EntidadeNaoLocalizada;
 import br.com.fiap.gig.domain.model.Avaliacao;
 import br.com.fiap.gig.interfaces.AvaliacaoController;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -16,6 +17,7 @@ public class AvaliacaoRestController {
 
     private final AvaliacaoController avaliacaoController;
 
+    @Inject
     public AvaliacaoRestController(AvaliacaoController avaliacaoController) {
         this.avaliacaoController = avaliacaoController;
     }
@@ -30,7 +32,7 @@ public class AvaliacaoRestController {
         }
     }
 
-    @Path("aadicionar/competencia/{id_avaliacao}/{id_competencia}")
+    @Path("adicionar/competencia/{id_avaliacao}/{id_competencia}")
     @POST
     public Response adicionarCompetencia(@PathParam("id_avaliacao") int id_avaliacao, @PathParam("id_competencia") int id_competencia) {
         try {

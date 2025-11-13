@@ -4,6 +4,7 @@ package br.com.fiap.gig.infrastructure.api.rest;
 import br.com.fiap.gig.domain.exception.EntidadeNaoLocalizada;
 import br.com.fiap.gig.domain.model.Competencia;
 import br.com.fiap.gig.interfaces.CompetenciaController;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -17,7 +18,7 @@ public class CompetenciaRestController {
 
     private final CompetenciaController competenciaController;
 
-
+    @Inject
     public CompetenciaRestController(CompetenciaController competenciaController) {
         this.competenciaController = competenciaController;
     }

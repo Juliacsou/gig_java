@@ -9,5 +9,5 @@ import java.util.List;
 public interface ScoreController {
     Score criarScore(Score score);
     Score buscarScore(String cpf_usuario) throws EntidadeNaoLocalizada;
-    Score calcularScore(Score score, List<Avaliacao> avaliacoes);
+    void atualizarScore(String cpf);
 }
