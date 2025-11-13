@@ -21,6 +21,10 @@ public class AvaliacaoServiceImpl implements AvaliacaoService {
 
     @Override
     public Avaliacao criarAvaliacao(Avaliacao avaliacao) {
+        int nota = avaliacao.getNota();
+        if (nota < 0 || nota > 5) {
+            throw new IllegalArgumentException("A nota da avaliação deve estar entre 0 e 5.");
+        }
         return avaliacaoRepository.criarAvaliacao(avaliacao);
     }
 

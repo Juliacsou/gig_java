@@ -25,10 +25,12 @@ public class AvaliacaoRestController {
     @POST
     public Response criarAvaliacao(Avaliacao avaliacaoInput) {
         try {
-            Avaliacao avaliacao = this.avaliacaoController.criarAvaliacao(avaliacaoInput);
+            Avaliacao avaliacao = avaliacaoController.criarAvaliacao(avaliacaoInput);
             return Response.status(Response.Status.CREATED).entity(avaliacao).build();
-        } catch (RuntimeException e) {
+        } catch (IllegalArgumentException e) {
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        } catch (RuntimeException e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }
 

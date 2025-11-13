@@ -59,7 +59,6 @@ public class JdbcAvaliacaoRepository implements AvaliacaoRepository {
             UPDATE T_GIG_AVALIACAO
             SET COM_AVALIACAO = ?,
                NOTA_AVALIACAO = ?,
-               DT_AVALIACAO = SYSDATE
             WHERE ID_AVALIACAO = ?
         """;
 
