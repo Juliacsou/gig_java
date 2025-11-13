@@ -4,6 +4,7 @@ import br.com.fiap.gig.domain.exception.EntidadeNaoLocalizada;
 import br.com.fiap.gig.domain.model.Avaliacao;
 import br.com.fiap.gig.domain.model.Competencia;
 import br.com.fiap.gig.domain.model.Score;
+import br.com.fiap.gig.domain.model.Usuario;
 import br.com.fiap.gig.domain.repository.AvaliacaoRepository;
 import br.com.fiap.gig.domain.repository.CompetenciaRepository;
 import br.com.fiap.gig.domain.repository.ScoreRepository;
@@ -47,33 +48,32 @@ public class ScoreServiceImpl implements ScoreService {
 
     public Score calcularScore(String cpfUsuario){
         List<Avaliacao> avaliacoes = avaliacaoRepository.buscarAvaliacaoUsuario(cpfUsuario);
-
         if (avaliacoes == null || avaliacoes.isEmpty()) {
             throw new RuntimeException("Usuário " + cpfUsuario + " ainda não possui avaliações.");
         }
 
-
         double notaMedia = avaliacoes.stream().mapToInt(Avaliacao::getNota).average().orElse(0.0);
-
         List<Competencia> competenciasUsuario = competenciaRepository.buscarCompetenciaUsuario(cpfUsuario);
 
         double somaPesos = 0.0;
-        if (competenciasUsuario != null) {
-            somaPesos = competenciasUsuario.stream()
-                    .mapToDouble(Competencia::getPeso)
-                    .sum();
+        if (competenciasUsuario != null && !competenciasUsuario.isEmpty()) {
+            somaPesos = competenciasUsuario.stream().mapToDouble(Competencia::getPeso).sum();
         }
+
 
         double scoreBase = (notaMedia / 5.0) * 100.0;
         double bonus = Math.min(10.0, somaPesos);
         double scoreTotal = Math.min(100.0, scoreBase + bonus);
 
+        Usuario usuario = new Usuario();
+        usuario.setCpf_usuario(cpfUsuario);
+
         Score score = new Score();
-        score.getUsuario().setCpf_usuario(cpfUsuario);
+        score.setUsuario(usuario);
         score.setNota_media((float) notaMedia);
         score.setScore_total((float) scoreTotal);
 
         return score;
     }
-    }
+}
 
