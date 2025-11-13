@@ -30,6 +30,17 @@ public class AvaliacaoRestController {
         }
     }
 
+    @Path("aadicionar/competencia/{id_avaliacao}/{id_competencia}")
+    @POST
+    public Response adicionarCompetencia(@PathParam("id_avaliacao") int id_avaliacao, @PathParam("id_competencia") int id_competencia) {
+        try {
+            this.avaliacaoController.adicionarCompetencias(id_avaliacao, id_competencia);
+            return Response.status(Response.Status.CREATED).build();
+        } catch (RuntimeException e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        }
+    }
+
     @PUT
     public Response editarAvaliacao(Avaliacao avaliacaoInput) {
         try {
@@ -42,7 +53,7 @@ public class AvaliacaoRestController {
 
     @GET
     @Path("buscar/{id}")
-    public Response buscarAvaliacao(int id) {
+    public Response buscarAvaliacao(@PathParam("id") int id) {
         try {
             Avaliacao avaliacao = this.avaliacaoController.buscarAvaliacao(id);
             return Response.ok(avaliacao).build();
@@ -53,7 +64,7 @@ public class AvaliacaoRestController {
 
     @GET
     @Path("buscar/usuario/{cpf}")
-    public Response buscarPorUsuario(String cpf) {
+    public Response buscarPorUsuario(@PathParam("cpf") String cpf) {
         try {
             List<Avaliacao> avaliacao = this.avaliacaoController.buscarAvaliacaoUsuario(cpf);
             return Response.ok(avaliacao).build();

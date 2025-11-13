@@ -45,7 +45,7 @@ public class CompetenciaRestController {
 
     @GET
     @Path("buscar/{id}")
-    public Response buscarCometencia(int id) {
+    public Response buscarCometencia(@PathParam("id") int id) {
         try {
             Competencia competencia = this.competenciaController.buscarCompetencia(id);
             return Response.ok(competencia).build();
@@ -56,7 +56,7 @@ public class CompetenciaRestController {
 
     @GET
     @Path("buscar/usuario/{cpf}")
-    public Response buscarPorUsuario(String cpf) {
+    public Response buscarPorUsuario(@PathParam("cpf") String cpf) {
         try {
             List<Competencia> compatencias = this.competenciaController.buscarCompetenciaUsuario(cpf);
             return Response.ok(compatencias).build();
