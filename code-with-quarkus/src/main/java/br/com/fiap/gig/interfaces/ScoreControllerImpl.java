@@ -25,9 +25,4 @@ public class ScoreControllerImpl implements ScoreController{
         return scoreService.buscarScore(cpf_usuario);
     }
 
-    @Override
-    public void atualizarScore(String cpf) {
-        scoreService.atualizarScore(cpf);
-    }
-
 }

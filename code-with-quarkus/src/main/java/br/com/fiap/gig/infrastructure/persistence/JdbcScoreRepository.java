@@ -2,6 +2,7 @@ package br.com.fiap.gig.infrastructure.persistence;
 
 import br.com.fiap.gig.domain.exception.EntidadeNaoLocalizada;
 import br.com.fiap.gig.domain.model.Score;
+import br.com.fiap.gig.domain.model.Usuario;
 import br.com.fiap.gig.domain.repository.ScoreRepository;
 
 import java.sql.Connection;
@@ -67,17 +68,21 @@ public class JdbcScoreRepository implements ScoreRepository {
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-
                     Score score = new Score();
                     score.setId_score(rs.getInt("ID_SCORE"));
                     score.setScore_total(rs.getFloat("SCORE_TOTAL"));
                     score.setNota_media(rs.getFloat("NOTA_MEDIA"));
-                    score.getUsuario().setCpf_usuario(rs.getString("CPF_USUARIO"));
+
+                    Usuario usuario = new Usuario();
+                    usuario.setCpf_usuario(rs.getString("CPF_USUARIO"));
+                    score.setUsuario(usuario);
 
                     return score;
                 }
             }
-            throw new EntidadeNaoLocalizada("Score para esse usuario não encontrado.");
+
+            throw new EntidadeNaoLocalizada("Score para esse usuário não encontrado.");
+
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao buscar score do usuário " + cpf_usuario, e);
         }
