@@ -19,6 +19,14 @@ public class Usuario {
         this.mail_usuario = mail_usuario;
     }
 
+    public Usuario(String nome_usuario, String cpf_usuario, String dt_nasc, String end_usuario, String mail_usuario) {
+        this.nome_usuario = nome_usuario;
+        this.cpf_usuario = cpf_usuario;
+        this.dt_nasc = dt_nasc;
+        this.end_usuario = end_usuario;
+        this.mail_usuario = mail_usuario;
+    }
+
     public String getNome_usuario() {return nome_usuario;}
     public void setNome_usuario(String nome_usuario) {this.nome_usuario = nome_usuario;}
     public String getCpf_usuario() {return cpf_usuario;}

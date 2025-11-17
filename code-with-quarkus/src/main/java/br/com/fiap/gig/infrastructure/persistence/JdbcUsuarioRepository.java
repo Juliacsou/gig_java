@@ -49,7 +49,7 @@ public class JdbcUsuarioRepository implements UsuarioRepository {
     public void editarUsuario(Usuario usuario) {
         String sql = """
             UPDATE T_GIG_USUARIO
-            SET nome_usuario = ?, senha = ?, dt_nasc = ?, end_usuario = ?, mail_usuario = ? 
+            SET nome_usuario = ?, senha = ?, dt_nasc = ?, end_usuario = ?, mail_usuario = ?
             WHERE cpf_usuario = ?
             """;
 
@@ -76,7 +76,7 @@ public class JdbcUsuarioRepository implements UsuarioRepository {
     @Override
     public Usuario buscarUsuario(String cpf) throws EntidadeNaoLocalizada {
         String sql = """
-        SELECT cpf_usuario, nome_usuario, senha, dt_nasc, end_usuario, mail_usuario
+        SELECT cpf_usuario, nome_usuario, dt_nasc, end_usuario, mail_usuario
         FROM T_GIG_USUARIO
         WHERE cpf_usuario = ?
         """;
@@ -91,12 +91,11 @@ public class JdbcUsuarioRepository implements UsuarioRepository {
 
                 String cpfBd = rs.getString("cpf_usuario");
                 String nome = rs.getString("nome_usuario");
-                String senhaBd = rs.getString("senha");
                 String dt_nasc = rs.getString("dt_nasc");
                 String end = rs.getString("end_usuario");
                 String mail = rs.getString("mail_usuario");
 
-                return new Usuario(nome, cpfBd, senhaBd, dt_nasc, end, mail);
+                return new Usuario(nome, cpfBd, dt_nasc, end, mail);
 
             } else {
                 throw new EntidadeNaoLocalizada("Usuário com CPF " + cpf + " não encontrado.");
@@ -110,7 +109,7 @@ public class JdbcUsuarioRepository implements UsuarioRepository {
     @Override
     public Usuario validarUsuario(String cpf, String senha) {
         String sql = """
-        SELECT cpf_usuario, nome_usuario, senha, dt_nasc, end_usuario, mail_usuario
+        SELECT cpf_usuario, nome_usuario, dt_nasc, end_usuario, mail_usuario
         FROM T_GIG_USUARIO
         WHERE cpf_usuario = ? AND senha = ?
         """;
@@ -126,11 +125,10 @@ public class JdbcUsuarioRepository implements UsuarioRepository {
             if (rs.next()) {
                 String cpfBd = rs.getString("cpf_usuario");
                 String nome = rs.getString("nome_usuario");
-                String senhaBd = rs.getString("senha");
                 String dtNasc = rs.getString("dt_nasc");
                 String end = rs.getString("end_usuario");
                 String mail = rs.getString("mail_usuario");
-                return new Usuario(nome, cpfBd, senhaBd, dtNasc, end, mail);
+                return new Usuario(nome, cpfBd, dtNasc, end, mail);
 
             } else {
                 throw new EntidadeNaoLocalizada("Usuário ou senha incorretos.");
