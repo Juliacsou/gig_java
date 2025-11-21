@@ -12,7 +12,7 @@ import br.com.fiap.gig.domain.service.ScoreService;
 
 import java.util.List;
 
-public abstract class ScoreServiceImpl implements ScoreService, ScoreRepository {
+public class ScoreServiceImpl implements ScoreService {
 
     private final ScoreRepository scoreRepository;
     private final AvaliacaoRepository avaliacaoRepository;
